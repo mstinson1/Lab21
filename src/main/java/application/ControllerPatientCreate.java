@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import view.PatientView;
 
@@ -60,6 +59,11 @@ public class ControllerPatientCreate {
             int id = sequence.getNextSequence("PATIENT_SEQUENCE");
             patientToInsert.setId(id);
             try {
+                // check for unique ssn
+                Patient patientExist = patientRepository.findBySsn(p.getSsn());
+                if (patientExist != null) {
+                    throw new Exception("Patient already exists");
+                }
                 patientRepository.insert(patientToInsert);
                 model.addAttribute("message", "Registration successful.");
                 model.addAttribute("patient", p);
@@ -72,17 +76,16 @@ public class ControllerPatientCreate {
                 return "patient_register";
             }
         } else {
+            /*
+             * on error
+             * model.addAttribute("message", some error message);
+             * model.addAttribute("patient", p);
+             * return "patient_register";
+             */
             model.addAttribute("patient", p);
             model.addAttribute("message", "Doctor does not exist");
             return "patient_register";
         }
-
-        /*
-         * on error
-         * model.addAttribute("message", some error message);
-         * model.addAttribute("patient", p);
-         * return "patient_register";
-         */
     }
 
     /*
@@ -99,7 +102,25 @@ public class ControllerPatientCreate {
      */
     @PostMapping("/patient/show")
     public String showPatient(PatientView p, Model model) {
-        return "patient_get";
-    }
+        // if found, return "patient_show", else return error message and "patient_get"
+        Patient patient = patientRepository.findByIdAndLastName(p.getId(), p.getLastName());
 
+        if (patient != null) {
+            p.setId(patient.getId());
+            p.setFirstName(patient.getFirstName());
+            p.setLastName(patient.getLastName());
+            p.setPrimaryName(patient.getPrimaryName());
+            p.setBirthdate(patient.getBirthdate());
+            p.setCity(patient.getCity());
+            p.setState(patient.getState());
+            p.setZipcode(patient.getZipcode());
+            p.setStreet(patient.getStreet());
+            model.addAttribute("patient", p);
+            return "patient_show";
+        } else {
+            model.addAttribute("message", "No records found");
+            model.addAttribute("patient", p);
+            return "patient_get";
+        }
+    }
 }
