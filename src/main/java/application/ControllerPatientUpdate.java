@@ -17,9 +17,6 @@ public class ControllerPatientUpdate {
   @Autowired
   private DoctorRepository doctorRepository;
 
-  @Autowired
-  private SequenceService sequenceService;
-
   @GetMapping("/patient/edit/{id}")
   public String getUpdateForm(@PathVariable int id, Model model) {
     Patient patient = patientRepository.findById(id).orElse(null);
