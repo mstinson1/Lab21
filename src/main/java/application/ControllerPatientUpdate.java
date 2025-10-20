@@ -30,7 +30,7 @@ public class ControllerPatientUpdate {
     }
 
     PatientView pv = new PatientView();
-    patient.setId(sequenceService.getNextSequence("patient_sequence"));
+    pv.setId(patient.getId());
     pv.setFirstName(patient.getFirstName());
     pv.setLastName(patient.getLastName());
     pv.setSsn(patient.getSsn());
@@ -52,9 +52,9 @@ public class ControllerPatientUpdate {
 
     if (patient == null) {
       model.addAttribute("message", "Patient update failed! Patient not found.");
+      model.addAttribute("patient", new PatientView());  // empty object to avoid Thymeleaf error
       return "patient_edit";
     }
-
     Doctor doctor = doctorRepository.findByLastName(pv.getPrimaryName());
     if (doctor == null) {
       model.addAttribute("message", "Primary doctor not found: " + pv.getPrimaryName());
