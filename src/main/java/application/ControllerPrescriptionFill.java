@@ -1,12 +1,8 @@
 package application;
 
-// TODO: Modify the controller classes to use the entity classes and repository.
-//  Remember to add instance variables for SequenceService and the repository interfaces.
-//  See ControllerDoctor for an example.
 import org.springframework.stereotype.Controller;
 
 import application.model.*;
-import application.service.SequenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import view.PrescriptionView;
 
 import java.math.BigDecimal;
-import java.util.List;
+
 
 @Controller
 public class ControllerPrescriptionFill {
@@ -27,8 +23,6 @@ public class ControllerPrescriptionFill {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @Autowired
-    private SequenceService sequenceService;
     @Autowired
     private PatientRepository patientRepository;
 
