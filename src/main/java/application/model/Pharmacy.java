@@ -60,9 +60,17 @@ public class Pharmacy {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
 	public ArrayList<DrugCost> getDrugCosts() {
 		return drugCosts;
+	}
+
+	public double getCostForDrug(String drugName) {
+		for (DrugCost dc : drugCosts) {
+			if (dc.getDrugName().equalsIgnoreCase(drugName)) {
+				return dc.getCost();
+			}
+		}
+		return -1;
 	}
 	public void setDrugCosts(ArrayList<DrugCost> drugCosts) {
 		this.drugCosts = drugCosts;
