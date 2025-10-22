@@ -3,6 +3,7 @@ db.drug.drop();
 
 db.pharmacy.insertMany([
     {
+        _id: 1,
         name: "CVS",
         address: "123 Main St, Anytown, USA",
         phone: "555-1234",
@@ -13,6 +14,7 @@ db.pharmacy.insertMany([
         ]
     },
     {
+        _id: 2,
         name: "Walgreens",
         address: "456 Oak Ave, Springfield, USA",
         phone: "555-5678",
@@ -24,6 +26,7 @@ db.pharmacy.insertMany([
         ]
     },
     {
+        _id: 3,
         name: "Rite Aid",
         address: "789 Pine Rd, Centerville, USA",
         phone: "555-2468",
@@ -35,6 +38,7 @@ db.pharmacy.insertMany([
         ]
     },
     {
+        _id: 4,
         name: "Costco Pharmacy",
         address: "200 Market Blvd, Metro City, USA",
         phone: "555-7890",
@@ -46,6 +50,7 @@ db.pharmacy.insertMany([
         ]
     },
     {
+        _id: 5,
         name: "Walmart Pharmacy",
         address: "55 Commerce Way, Riverdale, USA",
         phone: "555-3344",
@@ -59,11 +64,11 @@ db.pharmacy.insertMany([
 ]);
 
 db.drug.insertMany([
-    { name: "Aspirin" },
-    { name: "Tylenol" },
-    { name: "Ibuprofen" },
-    { name: "Advil" },
-    { name: "Claritin" },
-    { name: "Zyrtec" },
-    { name: "Benadryl" }
+    { _id: 1, name: "Aspirin" },
+    { _id: 2, name: "Tylenol" },
+    { _id: 3, name: "Ibuprofen" },
+    { _id: 4, name: "Advil" },
+    { _id: 5, name: "Claritin" },
+    { _id: 6, name: "Zyrtec" },
+    { _id: 7, name: "Benadryl" }
 ]);
